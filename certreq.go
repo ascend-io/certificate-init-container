@@ -8,14 +8,15 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
-	certificates "k8s.io/api/certificates/v1beta1"
-	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
 	"log"
 	"math/big"
 	"net"
 	"path"
 	"time"
+
+	certificates "k8s.io/api/certificates/v1beta1"
+	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
 )
 
 const (
@@ -32,7 +33,7 @@ func requestCertificate(client kubernetes.Interface, labels map[string]string, d
 	// that will be submitted to a Kubernetes CA to obtain a TLS certificate.
 	key, err := rsa.GenerateKey(rand.Reader, keysize)
 	if err != nil {
-		log.Fatalf("unable to genarate the private key: %s", err)
+		log.Fatalf("unable to generate the private key: %s", err)
 	}
 
 	pemKeyBytes := pem.EncodeToMemory(&pem.Block{
